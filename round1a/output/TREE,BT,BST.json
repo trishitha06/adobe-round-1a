@@ -1,0 +1,115 @@
+{
+  "title": "Tree Data Structure-",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "pathological binary tree if every internal node",
+      "page": 35
+    },
+    {
+      "level": "H1",
+      "text": "has only a single child",
+      "page": 35
+    },
+    {
+      "level": "H1",
+      "text": "What is Binary Search Tree?",
+      "page": 53
+    },
+    {
+      "level": "H1",
+      "text": "Advantages of Binary search tree",
+      "page": 60
+    },
+    {
+      "level": "H1",
+      "text": "As 15 is smaller than 45, so insert it as the root",
+      "page": 63
+    },
+    {
+      "level": "H1",
+      "text": "node of the left subtree.",
+      "page": 63
+    },
+    {
+      "level": "H1",
+      "text": "As 79 is greater than 45, so insert it as the root",
+      "page": 64
+    },
+    {
+      "level": "H1",
+      "text": "node of the right subtree.",
+      "page": 64
+    },
+    {
+      "level": "H1",
+      "text": "90 is greater than 45 and 79, so it will be inserted",
+      "page": 65
+    },
+    {
+      "level": "H1",
+      "text": "as the right subtree of 79.",
+      "page": 65
+    },
+    {
+      "level": "H1",
+      "text": "as a left subtree of 15.",
+      "page": 66
+    },
+    {
+      "level": "H1",
+      "text": "55 is larger than 45 and smaller than 79, so it will",
+      "page": 67
+    },
+    {
+      "level": "H1",
+      "text": "be inserted as the left subtree of 79.",
+      "page": 67
+    },
+    {
+      "level": "H1",
+      "text": "12 is smaller than 45 and 15 but greater than 10,",
+      "page": 68
+    },
+    {
+      "level": "H1",
+      "text": "so it will be inserted as the right subtree of 10.",
+      "page": 68
+    },
+    {
+      "level": "H1",
+      "text": "20 is smaller than 45 but greater than 15, so it will",
+      "page": 69
+    },
+    {
+      "level": "H1",
+      "text": "be inserted as the right subtree of 15.",
+      "page": 69
+    },
+    {
+      "level": "H1",
+      "text": "50 is greater than 45 but smaller than 79 and 55.",
+      "page": 70
+    },
+    {
+      "level": "H1",
+      "text": "So, it will be inserted as a left subtree of 55.",
+      "page": 70
+    },
+    {
+      "level": "H1",
+      "text": "Step1:",
+      "page": 74
+    },
+    {
+      "level": "H1",
+      "text": "Step2:",
+      "page": 75
+    },
+    {
+      "level": "H1",
+      "text": "Step3:",
+      "page": 76
+    }
+  ]
+}
