@@ -37,8 +37,71 @@ This solution uses **PyMuPDF** to:
 | **Sentence Filter**| [cite_start]Rejects text spans that appear to be long sentences, contain excessive punctuation, or start with common articles/prepositions, indicating non-heading content. [cite: 5] |
 | **Keyword Boost** | [cite_start]Provides an additional score boost for text containing common heading keywords like "Introduction", "Summary", "Conclusion", etc. [cite: 5] |
 
-
 ---
+
+�
+� Technologies Used 
+------------------------
+
+• PyMuPDF (fitz): PDF parsing 
+
+• regex (re): Heading pattern detection 
+
+• unicodedata: Unicode normalization 
+
+• os, json, time: File I/O and timing 
+
+� Code Explanation (Round 1A) 
+------------------------------
+
+main.py 
+------
+This is the entry point of the Round 1A app. It: 
+1. Scans all .pdf files in the /app/input directory. 
+2. For each file: 
+a. Calls extract_title_and_headings(pdf_path) from utils.py. 
+b. Stores result in a dictionary with title and outline. 
+c. Writes a corresponding .json file to /app/output. 
+3. Times the total processing duration. 
+
+utils.py – Core Logic 
+-----------------------
+Function: extract_title_and_headings(pdf_path) 
+
+Step-by-step: 
+
+1. Open PDF with PyMuPDF. 
+2. Estimate Body Font Size: 
+a. Loop through first 5 pages and count frequency of each font size. 
+b. Largest frequency is considered as body_size. 
+3. Extract Title: 
+a. On the first page, scan all text spans. 
+b. Choose the largest span (visually) that looks like a heading. 
+4. Scan All Pages: 
+a. Loop over every page and text span. 
+b. Filter candidates using is_likely_heading() (length, punctuation, 
+common starter words, etc.). 
+c. Use get_heading_level() to classify as H1, H2, or H3 based on font size + 
+boldness. 
+5. Score Each Heading: 
+a. Heuristic score components: 
+i. Font size boost (H1 > H2 > H3) 
+ii. Bold = +1 
+iii. All caps = +0.8 
+iv. Regex pattern match ("Chapter 1", etc) = +2 
+v. Center-aligned = +0.7 
+vi. Keyword match (e.g., "introduction") = +0.5 
+b. Skip low-scoring candidates (< threshold). 
+6. De-duplicate Similar Headings: 
+a. Avoid near-identical headings on same page within close Y distance. 
+7. Return Title + Cleaned Heading List 
+Helper Functions 
+• is_bold(span): Checks bold flag from span. 
+• is_all_caps(text): All uppercase and short length. 
+• is_likely_heading(text): Filters out long sentences, small strings, and non
+informative phrases. 
+• matches_heading_pattern(text): Detects known patterns like "Chapter 1.2", 
+"Appendix A". 
 
 ## 🌍 Multilingual Support
 
@@ -52,6 +115,15 @@ This extractor is designed to work effectively with **Unicode-based multilingual
 
 ✅ All language content is preserved via PyMuPDF's robust Unicode support.  
 ✅ The heading detection logic is primarily layout-based (font size, position, style) and pattern-based, making it highly adaptable across different languages and character sets without requiring language-specific models.
+
+� Docker Commands (Round 1A) 
+----------------------------
+Build Docker Image 
+docker build --platform linux/amd64 -t connect-dots-app . 
+
+Run Docker Container 
+docker run --rm -v ${PWD}/input:/app/input -v ${PWD}/output:/app/output connect-dots
+app
 
 **Sample multilingual output:**
 ```json
